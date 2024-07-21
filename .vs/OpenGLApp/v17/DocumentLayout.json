@@ -1,0 +1,55 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\DevLab\\Udemy\\ModernOpenGL\\Projects\\OpenGLApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1E31C881-5CEB-46AE-8BBF-723F5976D08D}|OpenGLApp\\OpenGLApp.vcxproj|F:\\DevLab\\Udemy\\ModernOpenGL\\Projects\\OpenGLApp\\OpenGLApp\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1E31C881-5CEB-46AE-8BBF-723F5976D08D}|OpenGLApp\\OpenGLApp.vcxproj|solutionrelative:OpenGLApp\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 1,
+      "VerticalTabListWidth": 100,
+      "DocumentGroups": [
+        {
+          "DockedHeight": 304,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "main.cpp",
+              "DocumentMoniker": "F:\\DevLab\\Udemy\\ModernOpenGL\\Projects\\OpenGLApp\\OpenGLApp\\main.cpp",
+              "RelativeDocumentMoniker": "OpenGLApp\\main.cpp",
+              "ToolTip": "F:\\DevLab\\Udemy\\ModernOpenGL\\Projects\\OpenGLApp\\OpenGLApp\\main.cpp",
+              "RelativeToolTip": "OpenGLApp\\main.cpp",
+              "ViewState": "AQIAADMAAAAAAAAAAAAAAEIAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-07-20T21:49:31.66Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedHeight": 96,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3822e751-eb69-4b0e-b301-595a9e4c74d5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
