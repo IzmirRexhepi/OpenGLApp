@@ -1,2 +1,2 @@
 ﻿  main.cpp
-  OpenGLApp.vcxproj -> F:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\Debug\OpenGLApp.exe
+F:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\main.cpp(4,10): error C1083: Cannot open include file: 'GL/glew.h': No such file or directory

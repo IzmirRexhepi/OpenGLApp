@@ -1,10 +1,69 @@
 #include <stdio.h>
+#include <string.h>
 
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
+#include <glew.h>
+#include <glfw3.h>
 
 //Windows dimensions
 const GLint WIDTH = 800, HEIGHT = 600;
+
+GLuint VAO, VBO, shader;
+
+//Vertex Shader (taken each vertice, allow to modify values and pass to fragement shader)
+//set the version of GLSL (openGL shader language)
+static const char* vShader = "									\n\
+#version 330													\n\
+																\n\
+layout(location = 0) in vec3 pos;								\n\
+																\n\
+void main(){													\n\
+	gl_Position = vec4(0.4 * pos.x, 0.4 * pos.y, pos.z, 1.0);	\n\
+}";
+
+//Fragment Shader (handles each fragment/chunk/pixel on screen and how each one works with these vertices values that are part of vertex values)
+static const char* fShader = "									\n\
+#version 330													\n\
+																\n\
+out vec4 colour;												\n\
+																\n\
+void main(){													\n\
+	colour = vec4(0.0, 0.0, 0.0, 1.0);							\n\
+}";
+
+void CreateTriangle() {
+	//location of vertices
+	GLfloat vertices[] = {
+		-1.f, -1.f, 0.f, //bottem left
+		1.f, -1.f, 0.f, //bottom right
+		0.f, 1.f, 0.f,	//middle top
+	};
+
+	//creating VAO (Vertex array object)
+	glGenVertexArrays(1, &VAO); //(amount of array to create, store ID of array)
+	glBindVertexArray(VAO); 
+	
+	//creating VBO(Vertex buffer object)
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	//conect the vertices to the buffer for the VBO
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices),vertices, GL_STATIC_DRAW); //Static Draw does not change the values when added (dynamic does)
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	glBindVertexArray(0);
+}
+
+void CompileShaders() {
+	shader = glCreateProgram();
+	if (!shader) {
+		printf("Error creating shader program\n");
+		return;
+	}
+
+}
 
 int main() {
 
