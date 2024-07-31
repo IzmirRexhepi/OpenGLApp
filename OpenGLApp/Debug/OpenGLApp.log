@@ -1,2 +1,4 @@
 ﻿  main.cpp
+F:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\Window.h(16,36): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
+F:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\Window.h(17,37): warning C4244: 'return': conversion from 'GLint' to 'GLfloat', possible loss of data
   OpenGLApp.vcxproj -> F:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\Debug\OpenGLApp.exe
