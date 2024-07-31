@@ -16,7 +16,7 @@
 const GLint WIDTH = 800, HEIGHT = 600;
 const float toRadians = 3.14159265f / 100.0f;
 
-GLuint VAO, VBO, shader, uniformModel;
+GLuint VAO, VBO, IBO, shader, uniformModel;
 
 bool direction = true;
 float triOffset = 0.0f;
@@ -59,16 +59,29 @@ void main(){													\n\
 }";
 
 void CreateTriangle() {
+
+	unsigned int indices[] = {
+		0, 3, 1, //change order which should be drawn first
+		1, 3, 2,
+		2, 3, 0,
+		0, 1, 2
+	};
+
 	//location of vertices
 	GLfloat vertices[] = {
-		-1.f, -1.f, 0.f, //bottem left
-		1.f, -1.f, 0.f, //bottom right
-		0.f, 1.f, 0.f,	//middle top
+		-1.f, -1.f, 0.f, //front bottem left
+		0.0f, -1.0f, 1.0f, //back middle bottom
+		1.f, -1.f, 0.f, //front bottom right
+		0.f, 1.f, 0.f,	//front middle top
 	};
 
 	//creating VAO (Vertex array object)
 	glGenVertexArrays(1, &VAO); //(amount of array to create, store ID of array)
 	glBindVertexArray(VAO); 
+
+	glGenBuffers(1, &IBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 	
 	//creating VBO(Vertex buffer object)
 	glGenBuffers(1, &VBO);
@@ -80,6 +93,7 @@ void CreateTriangle() {
 	glEnableVertexAttribArray(0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	glBindVertexArray(0);
 }
@@ -163,7 +177,7 @@ int main() {
 	// Allow forward compatibiltty
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	
-	GLFWwindow* mainWindow = glfwCreateWindow(WIDTH, HEIGHT, "Test window", NULL, NULL);
+	GLFWwindow	*mainWindow = glfwCreateWindow(WIDTH, HEIGHT, "Test window", NULL, NULL);
 	if (!mainWindow) {
 		printf("GLFW window creation failed!");
 		glfwTerminate();
@@ -180,12 +194,15 @@ int main() {
 	// Allow modern extension features
 	glewExperimental = GL_TRUE;
 
-	if (glewInit() != GLEW_OK) {
-		printf("GLEW initialisation failed!");
+	GLenum error = glewInit();
+	if (error != GLEW_OK) {
+		printf("Error: %s", glewGetErrorString(error));	glfwDestroyWindow(mainWindow);
 		glfwDestroyWindow(mainWindow);
 		glfwTerminate();
 		return 1;
 	}
+
+	glEnable(GL_DEPTH_TEST); //determine object are deeper into image (draw on top of the others)
 
 	//Setup Viewport size
 	glViewport(0,0, bufferWidth, bufferHeight);
@@ -226,13 +243,13 @@ int main() {
 
 		// clear window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		glUseProgram(shader); //grab ID after create, compile shader and everything (using this shader)
 
 		glm::mat4 model(1.0f);
 
-		//model = glm::rotate(model, curAngle * toRadians, glm::vec3(0.0f, 0.0f, 1.0f));
+		model = glm::rotate(model, curAngle * toRadians, glm::vec3(1.0f, 1.0f, 0.0f));
 		//model = glm::translate(model, glm::vec3(triOffset, 0.0f, 0.0f));
 		model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0f));
 
@@ -240,7 +257,10 @@ int main() {
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 
 		glBindVertexArray(VAO); // (using this VAO)
-		glDrawArrays(GL_TRIANGLES, 0, 3);//(Modes, start of aray, amount of points)
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
+			//glDrawArrays(GL_TRIANGLES, 0, 3);//(Modes, start of aray, amount of points)
+		glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 		glBindVertexArray(0); //unbind
 
