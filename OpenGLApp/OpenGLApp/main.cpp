@@ -41,6 +41,31 @@ static const char* vShader = "Shaders/shader.vert";
 //Fragment Shader (handles each fragment/chunk/pixel on screen and how each one works with these vertices values that are part of vertex values)
 static const char* fShader = "Shaders/shader.frag";
 
+void calcAverageNormals(unsigned int* indices, unsigned int indiceCount, GLfloat *vertices, unsigned int verticeCount,
+						unsigned int vLenght, unsigned int normalOffset) {
+	for (size_t i = 0; i < indiceCount; i += 3) {
+		unsigned int in0 = indices[i] * vLenght;
+		unsigned int in1 = indices[i+1] * vLenght;
+		unsigned int in2 = indices[i+2] * vLenght;
+		glm::vec3 v1(vertices[in1] - vertices[in0], vertices[in1 + 1] - vertices[in0 + 1], vertices[in1 + 2] - vertices[in0 + 2]);
+		glm::vec3 v2(vertices[in2] - vertices[in0], vertices[in2 + 1] - vertices[in0 + 1], vertices[in2 + 2] - vertices[in0 + 2]);
+		glm::vec3 normal = glm::cross(v1, v2);
+		normal = glm::normalize(normal);
+
+		in0 += normalOffset; in1 += normalOffset; in2 += normalOffset;
+		vertices[in0] += normal.x; vertices[in0 + 1] += normal.y; vertices[in0 + 2] += normal.z;
+		vertices[in1] += normal.x; vertices[in1 + 1] += normal.y; vertices[in1 + 2] += normal.z;
+		vertices[in2] += normal.x; vertices[in2 + 1] += normal.y; vertices[in2 + 2] += normal.z;
+	}
+	for (size_t i = 0; i < verticeCount / vLenght; i++) {
+		unsigned int nOffset = i * vLenght + normalOffset;
+		glm::vec3 vec(vertices[nOffset], vertices[nOffset + 1], vertices[nOffset + 2]);
+		vec = glm::normalize(vec);
+		vertices[nOffset] = vec.x; vertices[nOffset + 1] = vec.y; vertices[nOffset + 2] = vec.z;
+	}
+}
+
+
 void CreateObjects() {
 
 	unsigned int indices[] = {
@@ -52,19 +77,21 @@ void CreateObjects() {
 
 	//location of vertices
 	GLfloat vertices[] = {
-		//	  x	     y    u		 u		v
-		   -1.0f, -1.0f, 0.0f,  0.0f,  0.0f,			//front bottem left  Text:(bottem left)
-			0.0f, -1.0f, 1.0f,	0.5f,  0.0f,			//back middle bottom Text:(bottom middle)
-			1.0f, -1.0f, 0.0f,	1.0f,  0.0f,			//front bottom right Text:(bottem right)
-			0.0f,  1.0f, 0.0f,	0.5f,  1.0f				//front middle top   Text:(top middle)
+		//	  x	     y    u		 u		v		 nx   ny   nz
+		   -1.0f, -1.0f, 0.0f,  0.0f,  0.0f,	0.0f,0.0f,0.0f,		//front bottem left  Text:(bottem left)
+			0.0f, -1.0f, 1.0f,	0.5f,  0.0f,	0.0f,0.0f,0.0f,		//back middle bottom Text:(bottom middle)
+			1.0f, -1.0f, 0.0f,	1.0f,  0.0f,	0.0f,0.0f,0.0f,		//front bottom right Text:(bottem right)
+			0.0f,  1.0f, 0.0f,	0.5f,  1.0f,	0.0f,0.0f,0.0f		//front middle top   Text:(top middle)
 	};
 
+	calcAverageNormals(indices, 12, vertices, 32, 8, 5); //32 = 8*4; 
+
 	Mesh* obj1 = new Mesh();
-	obj1->CreateMesh(vertices, indices, 20, 12); //20 = amount of vertices passing (5*4= 20), 12 = number of indices
+	obj1->CreateMesh(vertices, indices, 32, 12); //32 = amount of vertices passing (8*4= 20), 12 = number of indices
 	meshList.push_back(obj1);
 
 	Mesh* obj2 = new Mesh();
-	obj2->CreateMesh(vertices, indices, 20, 12);
+	obj2->CreateMesh(vertices, indices, 32, 12);
 	meshList.push_back(obj2);
 }
 
@@ -89,11 +116,14 @@ int main() {
 	dirtTexture = Texture((char*)("Textures/dirt.png"));
 	dirtTexture.LoadTexture();
 
-	mainLight = Light(1.0f, 1.0f, 1.0f, 0.2f);
+	mainLight = Light(1.0f, 1.0f, 1.0f, 0.2f,
+					2.0f, -1.0f, -2.0f, 1.0f); //direction of light, last one = intensity of diffuse light
+	//mainLight = Light(1.0f, 1.0f, 1.0f, 0.2f);
 	//mainLight = Light(1.0f, 1.0f, 1.0f, 1.0f);
 	//mainLight = Light(1.0f, 0.0f, 0.0f, 1.0f);
 
-	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformAmbientIntensity =  0, uniformAbientColour = 0;
+	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0,
+			uniformAmbientIntensity =  0, uniformAbientColour = 0, uniformDirection = 0, uniformDiffuseIntensity = 0;
 	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
 	//Loop until window closed
@@ -118,8 +148,11 @@ int main() {
 		uniformView = shaderList[0].GetViewLocation();
 		uniformAbientColour = shaderList[0].GetAmbientColourLocation();
 		uniformAmbientIntensity = shaderList[0].GetAmbientIntensityLocation();
+		uniformDirection = shaderList[0].GetDirectionLocation();
+		uniformDiffuseIntensity = shaderList[0].GetDiffuseIntensityLocation();
 
-		mainLight.UseLight(uniformAmbientIntensity, uniformAbientColour);
+		mainLight.UseLight(uniformAmbientIntensity, uniformAbientColour,
+							uniformDiffuseIntensity, uniformDirection);
 
 		glm::mat4 model(1.0f);
 

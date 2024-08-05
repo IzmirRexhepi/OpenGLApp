@@ -1,5 +1,15 @@
-﻿  main.cpp
-E:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\OpenGLApp\main.cpp(122,47): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
-E:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\OpenGLApp\main.cpp(122,22): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+﻿  Light.cpp
+  Mesh.cpp
+E:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\OpenGLApp\Light.cpp(19,14): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+E:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\OpenGLApp\Light.cpp(20,14): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+E:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\OpenGLApp\Light.cpp(22,14): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+E:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\OpenGLApp\Light.cpp(23,14): warning C4244: 'argument': conversion from 'GLfloat' to 'GLint', possible loss of data
+  Shader.cpp
+  main.cpp
+E:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\OpenGLApp\main.cpp(155,33): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+E:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\OpenGLApp\main.cpp(155,8): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+E:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\OpenGLApp\main.cpp(154,47): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+E:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\OpenGLApp\main.cpp(154,22): warning C4244: 'argument': conversion from 'GLuint' to 'GLfloat', possible loss of data
+  Generating Code...
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
   OpenGLApp.vcxproj -> E:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\Debug\OpenGLApp.exe
