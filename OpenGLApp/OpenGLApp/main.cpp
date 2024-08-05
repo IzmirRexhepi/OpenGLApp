@@ -17,6 +17,7 @@
 #include "Shader.h"
 #include "Camera.h"
 #include "Texture.h"
+#include "Light.h"
 
 const float toRadians = 3.14159265f / 100.0f;
 
@@ -30,6 +31,8 @@ Texture dirtTexture;
 
 GLfloat deltaTime = 0.0f;
 GLfloat lastTime = 0.0f;
+
+Light mainLight;
 
 //Vertex Shader (taken each vertice, allow to modify values and pass to fragement shader)
 //set the version of GLSL (openGL shader language)
@@ -86,7 +89,11 @@ int main() {
 	dirtTexture = Texture((char*)("Textures/dirt.png"));
 	dirtTexture.LoadTexture();
 
-	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0;
+	mainLight = Light(1.0f, 1.0f, 1.0f, 0.2f);
+	//mainLight = Light(1.0f, 1.0f, 1.0f, 1.0f);
+	//mainLight = Light(1.0f, 0.0f, 0.0f, 1.0f);
+
+	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformAmbientIntensity =  0, uniformAbientColour = 0;
 	glm::mat4 projection = glm::perspective(45.0f, (GLfloat)mainWindow.getBufferWidth() / mainWindow.getBufferHeight(), 0.1f, 100.0f);
 
 	//Loop until window closed
@@ -109,6 +116,10 @@ int main() {
 		uniformModel = shaderList[0].GetModelLocation();
 		uniformProjection = shaderList[0].GetProjectionLocation();
 		uniformView = shaderList[0].GetViewLocation();
+		uniformAbientColour = shaderList[0].GetAmbientColourLocation();
+		uniformAmbientIntensity = shaderList[0].GetAmbientIntensityLocation();
+
+		mainLight.UseLight(uniformAmbientIntensity, uniformAbientColour);
 
 		glm::mat4 model(1.0f);
 
