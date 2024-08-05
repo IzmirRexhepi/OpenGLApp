@@ -9,7 +9,8 @@ public:
 	Light();
 	Light(GLfloat red, GLfloat green, GLfloat blue, GLfloat ambIntensity, GLfloat xDir, GLfloat yDir, GLfloat zDir, GLfloat dItensity);
 
-	void UseLight(GLfloat ambientIntensityLocation, GLfloat colourLocation, GLfloat diffuseIntensityLocation, GLfloat directionLocation);
+	void UseLight(GLuint ambientIntensityLocation, GLuint colourLocation,
+			GLuint diffuseIntensityLocation, GLuint directionLocation);
 	
 	~Light();
 private:
