@@ -21,6 +21,7 @@
 #include "Header Files/Texture.h"
 #include "Header Files/DirectionalLight.h"
 #include "Header Files/PointLight.h"
+#include "Header Files/SpotLight.h"
 #include "Header Files/Material.h"
 
 const float toRadians = 3.14159265f / 100.0f;
@@ -42,6 +43,7 @@ GLfloat lastTime = 0.0f;
 
 DirectionalLight mainLight;
 PointLight pointLights[MAX_POINT_LIGHTS];
+SpotLight spotLights[MAX_SPOT_LIGHTS];
 
 //Vertex Shader (taken each vertice, allow to modify values and pass to fragement shader)
 //set the version of GLSL (openGL shader language)
@@ -147,24 +149,57 @@ int main() {
 	dullMaterial = Material(0.3f, 4);
 
 	mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,
-								0.0f, 0.0f,
+								0.1f, 0.1f,
 								0.0, -0.0f, -1.0f); //direction of light, last one = intensity of diffuse light
 
 	unsigned int pointLightCount = 0;
 
 	pointLights[0] = PointLight(0.0f, 0.0f, 1.0f,
-								0.0f, 1.0f,
+								0.0f, 0.1f,
 								2.0f, 0.0f, 0.0f,
 								0.3f, 0.2f, 0.1f);
 
-	pointLightCount++;
+	//pointLightCount++;
 
 	pointLights[1] = PointLight(0.0f, 1.0f, 0.0f,
-								0.0f, 1.0f,
+								0.0f, 0.1f,
 								-2.0f, 2.0f, 0.0f,
 								0.3f, 0.1f, 0.1f);
 
-	pointLightCount++;
+	//pointLightCount++;
+
+
+	unsigned int spotLightCount = 0;
+
+	spotLights[0] = SpotLight(1.0f, 1.0f, 1.0f,
+						0.0f, 2.0f,
+						0.0f, 0.0f, 0.0f,
+						0.0f, -1.0f, 0.0f,
+						1.0f, 0.0f, 0.0f,
+						20.0f);
+
+	spotLightCount++;
+
+	spotLights[1] = SpotLight(1.0f, 1.0f, 1.0f,
+						0.0f, 1.0f,
+						10.0f, 1.5f, -5.0f,
+						-100.0f, -1.0f, 0.0f,
+						1.0f, 0.0f, 0.0f,
+						20.0f);
+
+	spotLightCount++;
+
+	spotLights[2] = SpotLight(1.0f, 1.0f, 1.0f,
+						0.0f, 1.0f,
+						0.0f, 0.0f, 0.0f,
+						0.0f, -1.0f, 0.0f,
+						1.0f, 0.0f, 0.0f,
+						20.0f);
+
+	spotLightCount++;
+
+
+
 
 	GLuint uniformProjection = 0, uniformModel = 0, uniformView = 0, uniformEyePosition = 0,
 		uniformSpecularIntensity = 0, uniformShininess = 0;
@@ -194,8 +229,13 @@ int main() {
 		uniformSpecularIntensity = shaderList[0].GetSpecularIntensityLocation();
 		uniformShininess = shaderList[0].GetShininessLocation();
 
+		glm::vec3 lowerLight = camera.getCameraPosition();
+		lowerLight.y -= 0.3f;
+		spotLights[0].SetFlash(lowerLight, camera.getCameraDirection());
+
 		shaderList[0].SetDirectionalLight(&mainLight);
 		shaderList[0].SetPointLights(pointLights, pointLightCount);
+		shaderList[0].SetSpotLights(spotLights, spotLightCount);
 				
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
 		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
@@ -223,7 +263,7 @@ int main() {
 		model = glm::translate(model, glm::vec3(0.0f, -6.0f, 0.0f));
 		//model = glm::scale(model, glm::vec3(0.4f, 0.4f, 1.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		plainTexture.UseTexture();
+		dirtTexture.UseTexture();
 		shinyMaterial.UseMaterial(uniformSpecularIntensity, uniformShininess);
 		meshList[2]->RenderMesh();
 

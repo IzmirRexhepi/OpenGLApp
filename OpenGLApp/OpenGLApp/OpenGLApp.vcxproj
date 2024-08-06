@@ -29,6 +29,7 @@
     <ClCompile Include="Source Files\Shader.cpp" />
     <ClCompile Include="Source Files\Texture.cpp" />
     <ClCompile Include="Source Files\Window.cpp" />
+    <ClCompile Include="Source Files\SpotLight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header Files\Camera.h" />
@@ -42,6 +43,7 @@
     <ClInclude Include="Header Files\stb_image.h" />
     <ClInclude Include="Header Files\Texture.h" />
     <ClInclude Include="Header Files\Window.h" />
+    <ClInclude Include="Header Files\SpotLight.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glew32.dll" />

@@ -13,11 +13,11 @@ public:
 
     void UseLight(GLuint ambientIntensityLocation, GLuint colourLocation,
         GLuint diffuseIntensityLocation, GLuint positionLocation,
-        GLuint constantLocation, GLuint linearLocation, GLfloat exponentLocation);
+        GLuint constantLocation, GLuint linearLocation, GLuint exponentLocation);
 
     ~PointLight();
 
-private:
+protected:
     glm::vec3 position;
 
     GLfloat constant, linear, exponent; //(ax^2+bx+c)/L; x= distance, a = exponent, b = linear, c = constant, L = light
