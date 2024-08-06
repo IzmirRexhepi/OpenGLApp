@@ -19,24 +19,29 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Light.cpp" />
+    <ClCompile Include="Source Files\Camera.cpp" />
+    <ClCompile Include="Source Files\DirectionalLight.cpp" />
+    <ClCompile Include="Source Files\Light.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Material.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="Source Files\Material.cpp" />
+    <ClCompile Include="Source Files\Mesh.cpp" />
+    <ClCompile Include="Source Files\PointLight.cpp" />
+    <ClCompile Include="Source Files\Shader.cpp" />
+    <ClCompile Include="Source Files\Texture.cpp" />
+    <ClCompile Include="Source Files\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Light.h" />
-    <ClInclude Include="Material.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="stb_image.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="Header Files\Camera.h" />
+    <ClInclude Include="Header Files\CommonValues.h" />
+    <ClInclude Include="Header Files\DirectionalLight.h" />
+    <ClInclude Include="Header Files\Light.h" />
+    <ClInclude Include="Header Files\Material.h" />
+    <ClInclude Include="Header Files\Mesh.h" />
+    <ClInclude Include="Header Files\PointLight.h" />
+    <ClInclude Include="Header Files\Shader.h" />
+    <ClInclude Include="Header Files\stb_image.h" />
+    <ClInclude Include="Header Files\Texture.h" />
+    <ClInclude Include="Header Files\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="glew32.dll" />
