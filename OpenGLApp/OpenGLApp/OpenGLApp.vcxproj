@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source Files\ShadowMap.cpp" />
     <ClCompile Include="Source Files\Model.cpp" />
     <ClCompile Include="Source Files\Camera.cpp" />
     <ClCompile Include="Source Files\DirectionalLight.cpp" />
@@ -46,8 +47,10 @@
     <ClInclude Include="Header Files\Window.h" />
     <ClInclude Include="Header Files\SpotLight.h" />
     <ClInclude Include="Header Files\Model.h" />
+    <ClInclude Include="Header Files\ShadowMap.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="assimp-vc143-mt.dll" />
     <None Include="glew32.dll" />
     <None Include="Shaders\shader.frag" />
     <None Include="Shaders\shader.vert" />
