@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source Files\OmniShadowMap.cpp" />
     <ClCompile Include="Source Files\ShadowMap.cpp" />
     <ClCompile Include="Source Files\Model.cpp" />
     <ClCompile Include="Source Files\Camera.cpp" />
@@ -48,6 +49,7 @@
     <ClInclude Include="Header Files\SpotLight.h" />
     <ClInclude Include="Header Files\Model.h" />
     <ClInclude Include="Header Files\ShadowMap.h" />
+    <ClInclude Include="Header Files\OmniShadowMap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp-vc143-mt.dll" />

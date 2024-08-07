@@ -54,6 +54,9 @@
     <ClCompile Include="Source Files\ShadowMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source Files\OmniShadowMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header Files\Camera.h">
@@ -96,6 +99,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Header Files\ShadowMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\OmniShadowMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
