@@ -1,8 +1,8 @@
 ﻿  main.cpp
-E:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\OpenGLApp\main.cpp(360,15): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
+E:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\OpenGLApp\main.cpp(377,15): warning C4244: 'initializing': conversion from 'double' to 'GLfloat', possible loss of data
   Generating code
-  0 of 894 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  4 of 966 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    7 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   OpenGLApp.vcxproj -> E:\DevLab\Udemy\ModernOpenGL\Projects\OpenGLApp\OpenGLApp\Release\OpenGLApp.exe

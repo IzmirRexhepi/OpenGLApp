@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source Files\Skybox.cpp" />
     <ClCompile Include="Source Files\OmniShadowMap.cpp" />
     <ClCompile Include="Source Files\ShadowMap.cpp" />
     <ClCompile Include="Source Files\Model.cpp" />
@@ -50,6 +51,7 @@
     <ClInclude Include="Header Files\Model.h" />
     <ClInclude Include="Header Files\ShadowMap.h" />
     <ClInclude Include="Header Files\OmniShadowMap.h" />
+    <ClInclude Include="Header Files\Skybox.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp-vc143-mt.dll" />
